@@ -10,6 +10,7 @@ builder.Services.AddControllers();
 var connString = builder.Configuration["DBConnectionString"];
 builder.Services.AddDbContext<ClinicDbContext>(option => option.UseSqlServer(connString));
 builder.Services.AddTransient<IAnimalRepository, AnimalRepository>();
+builder.Services.AddTransient<IVisitRepository, VisitRepository>();
 
 
 

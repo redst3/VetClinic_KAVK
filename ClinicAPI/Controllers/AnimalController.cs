@@ -41,11 +41,11 @@ namespace ClinicAPI.Controllers
         }
 
         //[HttpGet]
-        public async Task<IEnumerable<AnimalDto>> GetList()
-        {
-            var animals = await _repository.GetListAsync();
-            return animals.Select(a => new AnimalDto(a.Id, a.Name, a.Type, a.Breed, a.Age, a.OwnerName));
-        }
+        //public async Task<IEnumerable<AnimalDto>> GetList()
+        //{
+        //    var animals = await _repository.GetListAsync();
+        //    return animals.Select(a => new AnimalDto(a.Id, a.Name, a.Type, a.Breed, a.Age, a.OwnerName));
+        //}
 
         [HttpGet]
         [Route("{animalId}")]

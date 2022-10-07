@@ -7,7 +7,6 @@
         public DateTime CreatedDate { get; set; }
         public DateTime ConfirmedDate { get; set; }
         public bool isFinished { get; set; }
-        public Procedure Procedure { get; set; }
         public int AnimalId { get; set; }
     }
 }
