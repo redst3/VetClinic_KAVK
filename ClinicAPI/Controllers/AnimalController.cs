@@ -2,8 +2,8 @@
 using ClinicAPI.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using ClinicAPI.Data.Repositories;
-
-
+using ClinicAPI.Data;
+using System.Text.Json;
 
 namespace ClinicAPI.Controllers
 {
@@ -17,8 +17,30 @@ namespace ClinicAPI.Controllers
         {
             _repository = repository;
         }
+        // /animal?pageNumber=1&pageSize=2
+        [HttpGet(Name = "GetAnimals ")]
+        public async Task<IEnumerable<AnimalDto>> GetListPaging([FromQuery] AnimalSearchParameters searchParameters)
+        {
+            var animals = await _repository.GetListAsync(searchParameters);
+            var previousPageLink = animals.HasPrevious ? CreateAnimalsResourceUri(
+                searchParameters, ResourceUriType.PreviousPage) : null;
+            var nextPageLink = animals.HasNext ? CreateAnimalsResourceUri(
+                searchParameters, ResourceUriType.NextPage) : null;
 
-        [HttpGet]
+            var paginationData = new
+            {
+                totalCount = animals.TotalCount,
+                pageSize = animals.PageSize,
+                currentPage = animals.CurrentPage,
+                totalPages = animals.TotalPages,
+                previousPageLink,
+                nextPageLink,
+            };
+            Response.Headers.Add("Pagination", JsonSerializer.Serialize(paginationData));
+            return animals.Select(a => new AnimalDto(a.Id, a.Name, a.Type, a.Breed, a.Age, a.OwnerName));
+        }
+
+        //[HttpGet]
         public async Task<IEnumerable<AnimalDto>> GetList()
         {
             var animals = await _repository.GetListAsync();
@@ -82,6 +104,30 @@ namespace ClinicAPI.Controllers
             await _repository.RemoveAsync(animal);
 
             return NoContent();
+        }
+
+        /////////////////////
+        
+        private string? CreateAnimalsResourceUri(AnimalSearchParameters animalSearchParameters, ResourceUriType type)
+        {
+            return type switch
+            {
+                ResourceUriType.PreviousPage => Url.Link("GetAnimals", new
+                {
+                    pageNumber = animalSearchParameters.pageNumber - 1,
+                    pageSize = animalSearchParameters.pageSize,
+                }),
+                ResourceUriType.NextPage => Url.Link("GetAnimals", new
+                {
+                    pageNumber = animalSearchParameters.pageNumber + 1,
+                    pageSize = animalSearchParameters.pageSize,
+                }),
+                _ => Url.Link("GetAnimals", new
+                {
+                    pageNumber = animalSearchParameters.pageNumber,
+                    pageSize = animalSearchParameters.pageSize
+                })
+            };
         }
 
     }

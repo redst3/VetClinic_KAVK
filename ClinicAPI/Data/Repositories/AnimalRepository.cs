@@ -1,4 +1,6 @@
-﻿using ClinicAPI.Data.Entities;
+﻿using ClinicAPI.Data.Dtos;
+using ClinicAPI.Data.Entities;
+using ClinicAPI.Helpers;
 using Microsoft.EntityFrameworkCore;
 namespace ClinicAPI.Data.Repositories
 {
@@ -18,6 +20,12 @@ namespace ClinicAPI.Data.Repositories
         public async Task<IReadOnlyList<Animal>> GetListAsync()
         {
             return await _context.Animals.ToListAsync();
+        }
+        public async Task<PagedList<Animal>> GetListAsync(AnimalSearchParameters animalSearchParameters)
+        {
+            var queryable = _context.Animals.AsQueryable().OrderBy(a => a.Id);
+            return await PagedList<Animal>.CreateAsync(queryable, animalSearchParameters.pageNumber,
+                animalSearchParameters.pageSize);
         }
 
         public async Task CreateAsync(Animal animal)
