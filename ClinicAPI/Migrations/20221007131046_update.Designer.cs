@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicAPI.Migrations
 {
     [DbContext(typeof(ClinicDbContext))]
-    [Migration("20221007121639_edit")]
-    partial class edit
+    [Migration("20221007131046_update")]
+    partial class update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,9 +58,11 @@ namespace ClinicAPI.Migrations
 
             modelBuilder.Entity("ClinicAPI.Data.Entities.Procedure", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
@@ -72,6 +74,9 @@ namespace ClinicAPI.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("visitId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

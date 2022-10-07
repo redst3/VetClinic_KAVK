@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClinicAPI.Migrations
 {
     [DbContext(typeof(ClinicDbContext))]
-    [Migration("20221005101102_Initial")]
-    partial class Initial
+    [Migration("20221007135324_animi")]
+    partial class animi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,9 +58,11 @@ namespace ClinicAPI.Migrations
 
             modelBuilder.Entity("ClinicAPI.Data.Entities.Procedure", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
@@ -72,6 +74,12 @@ namespace ClinicAPI.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("animalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("visitId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -133,43 +141,12 @@ namespace ClinicAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ProcedureId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<bool>("isFinished")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AnimalId")
-                        .IsUnique();
-
-                    b.HasIndex("ProcedureId");
-
                     b.ToTable("Visits");
-                });
-
-            modelBuilder.Entity("ClinicAPI.Data.Entities.Visit", b =>
-                {
-                    b.HasOne("ClinicAPI.Data.Entities.Animal", null)
-                        .WithOne("Visit")
-                        .HasForeignKey("ClinicAPI.Data.Entities.Visit", "AnimalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ClinicAPI.Data.Entities.Procedure", "Procedure")
-                        .WithMany()
-                        .HasForeignKey("ProcedureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Procedure");
-                });
-
-            modelBuilder.Entity("ClinicAPI.Data.Entities.Animal", b =>
-                {
-                    b.Navigation("Visit")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

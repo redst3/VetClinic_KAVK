@@ -65,17 +65,18 @@ namespace ClinicAPI.Controllers
             };
             await _repository.CreateAsync(visit);
             return Created($"/api/animals/{animalId}/visits/{visit.Id}", visit);
-
         }
 
         [HttpPut]
         [Route("{visitId}")]
         public async Task<ActionResult<VisitDto>> Update(int animalId, int visitId, VisitDto newVisit)
         {
+            if (newVisit.description == null)
+                return BadRequest();
             var animal = await _animalRepository.GetAsync(animalId);
             if (animal == null)
             {
-                return NotFound($"Selected animalId:{animalId}");
+                return NotFound($"Selected animalId:{animalId} was not found");
             }
 
             var oldVisit = await _repository.GetAsync(animalId, visitId);
