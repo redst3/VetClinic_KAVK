@@ -12,10 +12,14 @@ namespace ClinicAPI.Controllers
     public class AnimalController : ControllerBase
     {
         private readonly IAnimalRepository _repository;
+        private readonly IVisitRepository _visitRepository;
+        private readonly IProcedureRepository _procedureRepository;
 
-        public AnimalController(IAnimalRepository repository)
+        public AnimalController(IAnimalRepository repository, IVisitRepository visitRepository, IProcedureRepository procedureRepository)
         {
             _repository = repository;
+            _visitRepository = visitRepository;
+            _procedureRepository = procedureRepository;
         }
         // /animal?pageNumber=1&pageSize=2
         [HttpGet(Name = "GetAnimals ")]

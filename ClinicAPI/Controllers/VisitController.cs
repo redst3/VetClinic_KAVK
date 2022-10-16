@@ -13,11 +13,13 @@ namespace ClinicAPI.Controllers
     {
         private readonly IVisitRepository _repository;
         private readonly IAnimalRepository _animalRepository;
+        private readonly IProcedureRepository _procedureRepository;
 
-        public VisitController(IVisitRepository repository, IAnimalRepository animalRepository)
+        public VisitController(IVisitRepository repository, IAnimalRepository animalRepository, IProcedureRepository procedureRepository)
         {
             _repository = repository;
             _animalRepository = animalRepository;
+            _procedureRepository = procedureRepository;
         }
 
         [HttpGet]

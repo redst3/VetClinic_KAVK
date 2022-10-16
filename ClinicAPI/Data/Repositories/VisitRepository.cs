@@ -45,6 +45,8 @@ namespace ClinicAPI.Data.Repositories
         public async Task RemoveAsync(Visit visit)
         {
             _context.Visits.Remove(visit);
+            var procedures = _context.Procedures.Where(a => a.visitId == visit.Id);
+            _context.Procedures.RemoveRange(procedures);
             await _context.SaveChangesAsync();
         }
     }

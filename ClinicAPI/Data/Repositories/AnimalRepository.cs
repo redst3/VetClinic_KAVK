@@ -53,6 +53,11 @@ namespace ClinicAPI.Data.Repositories
         public async Task RemoveAsync(Animal animal)
         {
             _context.Animals.Remove(animal);
+            var visits = _context.Visits.Where(a => a.AnimalId == animal.Id);
+            _context.Visits.RemoveRange(visits);
+            var procedures = _context.Procedures.Where(a => a.animalId == animal.Id);
+            _context.Procedures.RemoveRange(procedures);
+
             await _context.SaveChangesAsync();
         }
     }
