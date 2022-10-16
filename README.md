@@ -2,7 +2,7 @@
 
 ## Sistemos paskirtis 
 
-Projekto tikslas – Suteikti patogu aptarnavimą augintinių šeimininkams, kurie norėtu užregistruoti juos apžiūrai.
+Projekto tikslas – Sukurti patogia sistema šeimininkams užregistruojant savo augintinius veterinarinei apžiurai
 
 Veikimo principas – pačią kuriamą platformą sudaro dvi dalys: internetinė aplikacija, kuria naudosis darbuotojai ir vartotojai bei aplikacijų programavimo sąsaja (angl. trump. API). Darbuotojas, norėdamas naudotis šia platforma, gaus prisijungimus iš administratoriaus prie internetinės aplikacijos ir galės matyti savo srities užregistruotus vizitus, užpildyti informaciją apie specifinį augintinį, bei matyti savo specialybei skirtą informaciją. Administratorius registruos ir suteiks darbuotojams prisijungimus, matys darbuotojų veiklą.
 
