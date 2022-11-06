@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using ClinicAPI.Data.Repositories;
 using ClinicAPI.Data;
 using System.Text.Json;
+using Microsoft.AspNetCore.Authorization;
+using ClinicAPI.Auth.Models;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace ClinicAPI.Controllers
 {
@@ -14,15 +18,19 @@ namespace ClinicAPI.Controllers
         private readonly IVisitRepository _repository;
         private readonly IAnimalRepository _animalRepository;
         private readonly IProcedureRepository _procedureRepository;
+        private readonly IAuthorizationService _authorizationService;
 
-        public VisitController(IVisitRepository repository, IAnimalRepository animalRepository, IProcedureRepository procedureRepository)
+        public VisitController(IVisitRepository repository, IAnimalRepository animalRepository, IProcedureRepository procedureRepository,
+            IAuthorizationService authService)
         {
             _repository = repository;
             _animalRepository = animalRepository;
             _procedureRepository = procedureRepository;
+            _authorizationService = authService;
         }
 
         [HttpGet]
+        [Authorize(Roles = ClinicRoles.User + "," + ClinicRoles.Employee)]
         public async Task<IEnumerable<VisitDto>?> GetList(int animalId)
         {
             //var animal = await _animalRepository.GetAsync(animalId);
@@ -40,6 +48,7 @@ namespace ClinicAPI.Controllers
 
         [HttpGet]
         [Route("{visitId}")]
+        [Authorize(Roles = ClinicRoles.User + "," + ClinicRoles.Employee)]
         public async Task<ActionResult<VisitDto>> Get(int animalId, int visitId)
         {
             var visit = await _repository.GetAsync(animalId, visitId);
@@ -51,6 +60,7 @@ namespace ClinicAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = ClinicRoles.Employee)]
         public async Task<ActionResult<VisitDto>> Create(int animalId, VisitDto newVisit)
         {
             var animal = await _animalRepository.GetAsync(animalId);
@@ -63,7 +73,8 @@ namespace ClinicAPI.Controllers
                 Description = newVisit.description,
                 CreatedDate = DateTime.Now,
                 isFinished = false,
-                AnimalId = animalId
+                AnimalId = animalId,
+                UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)
             };
             await _repository.CreateAsync(visit);
             return Created($"/api/animals/{animalId}/visits/{visit.Id}", visit);
@@ -71,6 +82,7 @@ namespace ClinicAPI.Controllers
 
         [HttpPut]
         [Route("{visitId}")]
+        [Authorize(Roles = ClinicRoles.Employee)]
         public async Task<ActionResult<VisitDto>> Update(int animalId, int visitId, VisitDto newVisit)
         {
             if (newVisit.description == null)
@@ -86,6 +98,14 @@ namespace ClinicAPI.Controllers
             {
                 return NotFound();
             }
+            var test = User;
+            //var authResult = await _authorizationService.AuthorizeAsync(User, animal, PolicyNames.ResourceOwner);
+            var authResult2 = await _authorizationService.AuthorizeAsync(User, oldVisit, PolicyNames.ResourceOwner);
+            if (!authResult2.Succeeded)
+            {
+                return Forbid();
+            }
+
             oldVisit.Description = newVisit.description;
             await _repository.UpdateAsync(oldVisit);
             return Ok(oldVisit);
@@ -94,14 +114,21 @@ namespace ClinicAPI.Controllers
 
         [HttpDelete]
         [Route("{visitId}")]
+        [Authorize(Roles = ClinicRoles.Employee)]
         public async Task<ActionResult> Remove(int animalId, int visitId)
         {
-            var post = await _repository.GetAsync(animalId, visitId);
-            if(post == null)
+            var visit = await _repository.GetAsync(animalId, visitId);
+            if(visit == null)
             {
                 return NotFound();
             }
-            await _repository.RemoveAsync(post);
+            var authResult = await _authorizationService.AuthorizeAsync(User, visit, PolicyNames.ResourceOwner);
+            if (!authResult.Succeeded)
+            {
+                return Forbid();
+            }
+
+            await _repository.RemoveAsync(visit);
             return NoContent();
         }
     }

@@ -140,6 +140,10 @@ namespace ClinicAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("animalId")
                         .HasColumnType("int");
 
@@ -147,6 +151,8 @@ namespace ClinicAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Procedures");
                 });
@@ -172,10 +178,16 @@ namespace ClinicAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("isFinished")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Visits");
                 });
@@ -314,6 +326,28 @@ namespace ClinicAPI.Migrations
                 });
 
             modelBuilder.Entity("ClinicAPI.Data.Entities.Animal", b =>
+                {
+                    b.HasOne("ClinicAPI.Auth.Models.ClinicUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ClinicAPI.Data.Entities.Procedure", b =>
+                {
+                    b.HasOne("ClinicAPI.Auth.Models.ClinicUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ClinicAPI.Data.Entities.Visit", b =>
                 {
                     b.HasOne("ClinicAPI.Auth.Models.ClinicUser", "User")
                         .WithMany()

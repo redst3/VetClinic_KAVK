@@ -31,6 +31,7 @@ namespace ClinicAPI.Controllers
 
         // /animal?pageNumber=1&pageSize=2
         [HttpGet(Name = "GetAnimals ")]
+        [Authorize(Roles = ClinicRoles.User + "," + ClinicRoles.Employee)]
         public async Task<IEnumerable<AnimalDto>> GetListPaging([FromQuery] AnimalSearchParameters searchParameters)
         {
             var animals = await _repository.GetListAsync(searchParameters);
@@ -54,6 +55,7 @@ namespace ClinicAPI.Controllers
 
         [HttpGet]
         [Route("{animalId}")]
+        [Authorize(Roles = ClinicRoles.User + "," + ClinicRoles.Employee)]
         public async Task<ActionResult<AnimalDto>> Get(int animalId)
         {
             var animal = await _repository.GetAsync(animalId);
@@ -106,6 +108,7 @@ namespace ClinicAPI.Controllers
 
         [HttpDelete]
         [Route("{animalId}")]
+        [Authorize(Roles = ClinicRoles.User)]
         public async Task<ActionResult> Remove(int animalId)
         {
             var animal = await _repository.GetAsync(animalId);
@@ -113,6 +116,12 @@ namespace ClinicAPI.Controllers
             if(animal == null)
             {
                 return NotFound();
+            }
+
+            var authResult = await _authorizationService.AuthorizeAsync(User, animal, PolicyNames.ResourceOwner);
+            if (!authResult.Succeeded)
+            {
+                return Forbid();
             }
             await _repository.RemoveAsync(animal);
 

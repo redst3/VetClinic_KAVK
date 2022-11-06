@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 builder.Services.AddControllers();
-var connString = builder.Configuration["DBConnectionString"];
+var connString = builder.Configuration["AZURE_SQL_CONNECTIONSTRING"];
 
 builder.Services.AddIdentity<ClinicUser, IdentityRole>()
     .AddEntityFrameworkStores<ClinicDbContext>()
