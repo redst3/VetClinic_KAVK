@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 builder.Services.AddControllers();
-var connString = builder.Configuration["AZURE_SQL_CONNECTIONSTRING"];
+var connString = builder.Configuration["DBConnectionString"];
 
 builder.Services.AddIdentity<ClinicUser, IdentityRole>()
     .AddEntityFrameworkStores<ClinicDbContext>()
@@ -24,7 +24,7 @@ builder.Services.AddDbContext<ClinicDbContext>(option => option.UseSqlServer(con
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeSchem e = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 
 }).AddJwtBearer(options =>
