@@ -24,7 +24,7 @@ builder.Services.AddDbContext<ClinicDbContext>(option => option.UseSqlServer(con
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeSchem e = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 
 }).AddJwtBearer(options =>
@@ -49,7 +49,10 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.AddSingleton<IAuthorizationHandler, ResourceOwnerAuthorizationHandler>();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
+app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true).AllowCredentials());
 
 app.MapControllers();
 

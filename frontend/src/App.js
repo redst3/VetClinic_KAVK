@@ -7,7 +7,9 @@ import {
   EmployeePage,
   UserPage,
   SignUpPage,
+  LoginPage,
 } from "./components/pages/index";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -20,7 +22,9 @@ function App() {
           <Route path="/employee" element={<EmployeePage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
+        <Footer />
       </Router>
     </>
   );

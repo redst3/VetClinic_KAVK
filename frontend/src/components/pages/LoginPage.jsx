@@ -10,59 +10,41 @@ export default function UserPage() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    authServices.login(username, password).then(
-      (userData) => {
-        setError("");
-        navigate("/");
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    authServices.login(username, password).then((response) => {
+      console.log(response);
+    });
   };
 
   return (
     <>
       <div className="container">
         <div className="form">
-          <h1>Register</h1>
+          <h1>Login</h1>
           <Form onSubmit={handleSubmit}>
-            <Form.Group size="lg" controlId="email">
-              <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required={true}
-              />
-            </Form.Group>
             <Form.Group size="lg" controlId="username">
               <Form.Label>Username</Form.Label>
               <Form.Control
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                required={true}
               />
             </Form.Group>
             <Form.Group size="lg" controlId="password">
               <Form.Label>Password</Form.Label>
               <Form.Control
-                type="password"
+                type="text"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required={true}
               />
             </Form.Group>
             <p className="error-message">{error}</p>
             <Button type="submit">Login</Button>
-            <Link className="form-help" to="/login">
-              If you are registed, use this instead!
+            <Link className="form-help" to="/sign-up">
+              If you are a new user, use this instead!
             </Link>
           </Form>
         </div>

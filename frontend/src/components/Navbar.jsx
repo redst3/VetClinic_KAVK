@@ -6,6 +6,7 @@ import { Button } from "./Button";
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [login, setLogin] = useState("Login");
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(setClick(false));
@@ -55,15 +56,19 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <Link
-                to="/sign-up"
+                to="/login"
                 className="nav-links-mobile"
                 onClick={closeMobileMenu}
               >
-                Sign Up
+                {login}
               </Link>
             </li>
           </ul>
-          {button && <Button buttonStyle="btn--outline">Sign up</Button>}
+          {button && (
+            <Button buttonStyle="btn--outline" link="/login">
+              {login}
+            </Button>
+          )}
         </div>
       </nav>
     </>

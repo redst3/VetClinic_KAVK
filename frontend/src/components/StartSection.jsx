@@ -16,6 +16,7 @@ function StartSection() {
           className="btns"
           buttonStyle="btn--outline"
           buttonSize="btn--large"
+          link="/sign-up"
         >
           GET STARTED
         </Button>
