@@ -15,6 +15,8 @@ import {
   SignUpPage,
   LoginPage,
   RegisteredAnimalsPage,
+  RegisteredAnimalsEditPage,
+  RegisteredAnimalsCreatePage,
 } from "./components/pages/index";
 import Footer from "./components/Footer";
 
@@ -39,6 +41,24 @@ function App() {
                 <ProtectedRoutes
                   requiredRole={"User"}
                   page={<RegisteredAnimalsPage />}
+                />
+              }
+            />
+            <Route
+              path="/user/useranimals/edit"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"User"}
+                  page={<RegisteredAnimalsEditPage />}
+                />
+              }
+            />
+            <Route
+              path="/user/useranimals/create"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"User"}
+                  page={<RegisteredAnimalsCreatePage />}
                 />
               }
             />

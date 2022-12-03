@@ -16,38 +16,6 @@ function Cards() {
               label="Animal"
               path="/user/useranimals"
             />
-            <CardItem
-              src={photo}
-              text="Register an animal"
-              label="Animal"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-          </ul>
-          <ul className="cards__items">
-            <CardItem
-              src={photo}
-              text="Testavimasaaaaa"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimasaaaa"
-              label="Testavimas"
-              path="/"
-            />
           </ul>
         </div>
       </div>
