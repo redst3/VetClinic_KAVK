@@ -15,13 +15,13 @@ export default function UserPage() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    authServices.login(username, password).then(
-      (userData) => {
-        setError("");
-        navigate("/");
+    authServices.register(username, password, email).then(
+      (response) => {
+        localStorage.setItem("navbarUpdate", true);
+        navigate("/login");
       },
       (error) => {
-        console.log(error);
+        setError("Registration was not successful!");
       }
     );
   };
@@ -30,7 +30,7 @@ export default function UserPage() {
     <>
       <div className="container">
         <div className="form">
-          <h1>Register</h1>
+          <h1>Register form</h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="email">
               <Form.Label>Email</Form.Label>
@@ -60,7 +60,7 @@ export default function UserPage() {
               />
             </Form.Group>
             <p className="error-message">{error}</p>
-            <Button type="submit">Login</Button>
+            <Button type="submit">Register</Button>
             <Link className="form-help" to="/login">
               If you are registed, use this instead!
             </Link>

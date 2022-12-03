@@ -10,11 +10,16 @@ function Cards() {
       <div className="cards__container">
         <div className="cards__wrapper">
           <ul className="cards__items">
-            <CardItem src={photo} text="Register" label="Animal" path="/" />
             <CardItem
               src={photo}
-              text="Testavimas"
-              label="Testavimas"
+              text="All user animals"
+              label="Animal"
+              path="/user/useranimals"
+            />
+            <CardItem
+              src={photo}
+              text="Register an animal"
+              label="Animal"
               path="/"
             />
             <CardItem

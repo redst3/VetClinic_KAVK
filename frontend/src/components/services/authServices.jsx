@@ -1,4 +1,5 @@
 import axios from "axios";
+import jwt from "jwt-decode";
 
 const API_URL = "http://localhost:1234/api";
 
@@ -16,25 +17,44 @@ class AuthService {
       },
       data: data,
     };
-    axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-        localStorage.setItem("user", JSON.stringify(response.data));
-        return true;
-      })
-      .catch(function (error) {
-        console.log(error);
-        return false;
-      });
-
-    // return axios
-    //   .post(API_URL + { username: username, password: password })
-    //   .then((response) => {
-    //     if (response.data.token) {
-    //       localStorage.setItem("user", JSON.stringify(response.data));
-    //     }
-    //     return response.data;
-    //   });
+    return axios(config).then(function (response) {
+      if (response.data.accessToken) {
+        const user = jwt(response.data.accessToken);
+        const token = response.data.accessToken;
+        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", token);
+        let roles =
+          user["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+        console.log(roles);
+        if (roles.length === 3) {
+          localStorage.setItem("role", "Admin");
+        } else {
+          localStorage.setItem("role", roles);
+        }
+      }
+      return response.data;
+    });
+  }
+  logout() {
+    localStorage.clear();
+  }
+  register(username, password, email) {
+    var data = JSON.stringify({
+      userName: username,
+      email: email,
+      password: password,
+    });
+    var config = {
+      method: "post",
+      url: API_URL + "/register",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+    return axios(config).then(function (response) {
+      return response.data;
+    });
   }
 }
 export default new AuthService();

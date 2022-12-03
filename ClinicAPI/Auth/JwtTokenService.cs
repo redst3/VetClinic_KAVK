@@ -38,7 +38,7 @@ namespace ClinicAPI.Auth
                 (
                     issuer: _issuer,
                     audience: _audience,
-                    expires: DateTime.UtcNow.AddHours(1), // 5 min
+                    expires: DateTime.UtcNow.AddHours(5), // 5 min
                     claims: authClaims,
                     signingCredentials: new SigningCredentials(_authKey, SecurityAlgorithms.HmacSha256)
                 );

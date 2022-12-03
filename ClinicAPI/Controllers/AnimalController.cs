@@ -50,7 +50,7 @@ namespace ClinicAPI.Controllers
                 nextPageLink,
             };
             Response.Headers.Add("Pagination", JsonSerializer.Serialize(paginationData));
-            return animals.Select(a => new AnimalDto(a.Id, a.Name, a.Type, a.Breed, a.Age));
+            return animals.Select(a => new AnimalDto(a.Id, a.Name, a.Type, a.Breed, a.Age, a.UserId));
         }
 
         [HttpGet]
@@ -63,7 +63,7 @@ namespace ClinicAPI.Controllers
             {
                 return NotFound();
             }
-            return new AnimalDto(animal.Id, animal.Name, animal.Type, animal.Breed, animal.Age);
+            return new AnimalDto(animal.Id, animal.Name, animal.Type, animal.Breed, animal.Age, animal.UserId);
         }
 
         [HttpPost]
@@ -74,7 +74,7 @@ namespace ClinicAPI.Controllers
                  Breed = newAnimal.breed, Age = newAnimal.age, UserId = User.FindFirstValue(JwtRegisteredClaimNames.Sub)};
             await _repository.CreateAsync(animal);
 
-            return Created("", new AnimalDto(animal.Id, animal.Name, animal.Type, animal.Breed, animal.Age));
+            return Created("", new AnimalDto(animal.Id, animal.Name, animal.Type, animal.Breed, animal.Age, animal.UserId));
             //return CreatedAtAction("GetAnimal", new {animalId = animal.Id}, 
             //    new AnimalDto(animal.Name, animal.Type, animal.Breed, animal.Age, animal.OwnerName));
         }
@@ -103,7 +103,7 @@ namespace ClinicAPI.Controllers
 
             await _repository.UpdateAsync(animal);
 
-            return Ok(new AnimalDto(animal.Id, animal.Name, animal.Type, animal.Breed, animal.Age));
+            return Ok(new AnimalDto(animal.Id, animal.Name, animal.Type, animal.Breed, animal.Age, animal.UserId));
         }
 
         [HttpDelete]
