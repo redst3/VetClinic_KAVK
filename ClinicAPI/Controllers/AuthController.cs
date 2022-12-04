@@ -71,6 +71,13 @@ namespace ClinicAPI.Controllers
             return Ok(new SuccessfulLoginDto(accessToken));
 
         }
+        [HttpGet]
+        [Route("users")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _userManager.GetUsersInRoleAsync("User");
+            return Ok(users.Select(user => new UserDto(user.Id, user.UserName, user.Email)));
+        }
 
     }
 }

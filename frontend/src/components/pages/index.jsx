@@ -16,7 +16,7 @@ import VisitProcedureListEmployee from "./employee/VisitProcedureListEmployee";
 import VisitProcedureEdit from "./employee/VisitProcedureEdit";
 import VisitProcedureCreate from "./employee/VisitProcedureCreate";
 import VisitProcedureList from "./user/VisitProcedureList";
-
+import AllUsersPage from "./admin/AllUsersPage";
 export {
   HomePage,
   AdminPage,
@@ -36,4 +36,5 @@ export {
   VisitProcedureEdit,
   VisitProcedureCreate,
   VisitProcedureList,
+  AllUsersPage,
 };

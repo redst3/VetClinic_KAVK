@@ -1,7 +1,7 @@
 import React from "react";
 import CardItem from "./CardItem";
 import "./Cards.css";
-import photo from "../images/temp.png";
+import photo from "../images/users.png";
 
 function Cards() {
   return (
@@ -12,41 +12,9 @@ function Cards() {
           <ul className="cards__items">
             <CardItem
               src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-          </ul>
-          <ul className="cards__items">
-            <CardItem
-              src={photo}
-              text="Testavimasaaaaa"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimasaaaa"
-              label="Testavimas"
-              path="/"
+              text="MANAGE USERS"
+              label="Users"
+              path="/admin/users"
             />
           </ul>
         </div>
