@@ -27,6 +27,7 @@ import {
   VisitProcedureCreate,
   VisitProcedureList,
   AllUsersPage,
+  AllEmployeesPage,
 } from "./components/pages/index";
 import Footer from "./components/Footer";
 
@@ -180,6 +181,15 @@ function App() {
                 <ProtectedRoutes
                   requiredRole={"Admin"}
                   page={<AllUsersPage />}
+                />
+              }
+            />
+            <Route
+              path="/admin/employees"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"Admin"}
+                  page={<AllEmployeesPage />}
                 />
               }
             />

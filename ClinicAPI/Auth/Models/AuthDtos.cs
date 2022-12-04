@@ -7,6 +7,7 @@ namespace ClinicAPI.Auth.Models
     public record LoginUserDto(string UserName, string Password);
 
     public record UserDto(string Id, string UserName, string Email);
+    public record SearchDto(string Id);
 
     public record SuccessfulLoginDto(string accessToken); 
 }

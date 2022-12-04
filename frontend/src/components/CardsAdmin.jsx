@@ -13,8 +13,14 @@ function Cards() {
             <CardItem
               src={photo}
               text="MANAGE USERS"
-              label="Users"
+              label="User"
               path="/admin/users"
+            />
+            <CardItem
+              src={photo}
+              text="MANAGE EMPLOYEES"
+              label="Employee"
+              path="/admin/employees"
             />
           </ul>
         </div>

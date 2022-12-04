@@ -12,17 +12,18 @@ using Microsoft.AspNetCore.Authorization;
 namespace ClinicAPI.Controllers
 {
     [ApiController]
-    [AllowAnonymous]
     [Route("api")]
     public class AuthController : ControllerBase
     {
         private readonly UserManager<ClinicUser> _userManager;
         private readonly IJwtTokenService _jwtTokenService;
+        private readonly IAuthorizationService _authorizationService;
 
-        public AuthController(UserManager<ClinicUser> userManager, IJwtTokenService jwtTokenService)
+        public AuthController(UserManager<ClinicUser> userManager, IJwtTokenService jwtTokenService, IAuthorizationService authService)
         {
             _userManager = userManager;
             _jwtTokenService = jwtTokenService;
+            _authorizationService = authService;
         }
 
         [HttpPost]
@@ -73,10 +74,61 @@ namespace ClinicAPI.Controllers
         }
         [HttpGet]
         [Route("users")]
+        [Authorize(Roles = ClinicRoles.Admin)]
         public async Task<IActionResult> GetUsers()
         {
+            var admin = await _userManager.FindByNameAsync("admin");
             var users = await _userManager.GetUsersInRoleAsync("User");
+            users.Remove(admin);
             return Ok(users.Select(user => new UserDto(user.Id, user.UserName, user.Email)));
+        }
+        [HttpGet]
+        [Route("employees")]
+        [Authorize(Roles = ClinicRoles.Admin)]
+        public async Task<IActionResult> GetEmployees()
+        {
+            var admin = await _userManager.FindByNameAsync("admin");
+            var users = await _userManager.GetUsersInRoleAsync("Employee");
+            users.Remove(admin);
+            return Ok(users.Select(user => new UserDto(user.Id, user.UserName, user.Email)));
+        }
+        [HttpDelete]
+        [Route("remove")]
+        [Authorize(Roles = ClinicRoles.Admin)]
+        public async Task<IActionResult> Remove(SearchDto searchDto)
+        {
+            var found = await _userManager.FindByIdAsync(searchDto.Id);
+            if(found == null)
+            {
+                return NotFound();
+            }
+            await _userManager.DeleteAsync(found);
+            return Ok();
+        }
+        [HttpPut]
+        [Route("update")]
+        [Authorize(Roles = ClinicRoles.Admin)]
+        public async Task<IActionResult> ChangeRole(SearchDto searchDto)
+        {
+            var found = await _userManager.FindByIdAsync(searchDto.Id);
+            if (found == null)
+            {
+                return NotFound();
+            }
+
+            /// user is found
+            bool flag = await _userManager.IsInRoleAsync(found, "User");
+            if (flag)
+            {
+                await _userManager.AddToRoleAsync(found, "Employee");
+                await _userManager.RemoveFromRoleAsync(found, "User");
+            }
+            else
+            {
+                await _userManager.AddToRoleAsync(found, "User");
+                await _userManager.RemoveFromRoleAsync(found, "Employee");
+            }
+            return Ok();
         }
 
     }

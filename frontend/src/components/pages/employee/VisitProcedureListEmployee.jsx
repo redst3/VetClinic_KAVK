@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../registeredPages.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import procedureServices from "../../services/procedureServices";
+import { confirmAlert } from "react-confirm-alert";
 
 export default function VisitProcedureListEmployee() {
   const location = useLocation();
@@ -38,6 +39,21 @@ export default function VisitProcedureListEmployee() {
         visitId: location.state.visitId,
         procedureId: event.target.value,
       },
+    });
+  };
+  const confirmWindow = (event) => {
+    confirmAlert({
+      title: "Confirm deletion",
+      message: "This action can not be undone!",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => handleDelete(event),
+        },
+        {
+          label: "No",
+        },
+      ],
     });
   };
   const handleDelete = async (event) => {
@@ -108,7 +124,7 @@ export default function VisitProcedureListEmployee() {
                       </button>
                       <button
                         className="button-delete"
-                        onClick={handleDelete}
+                        onClick={confirmWindow}
                         value={procedure.id}
                       >
                         {" "}

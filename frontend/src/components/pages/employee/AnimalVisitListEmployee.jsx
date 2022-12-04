@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../registeredPages.scss";
 import { useLocation, useNavigate } from "react-router-dom";
 import visitServices from "../../services/visitServices";
+import { confirmAlert } from "react-confirm-alert";
 
 export default function AnimalVisitListEmployee() {
   const location = useLocation();
@@ -29,6 +30,21 @@ export default function AnimalVisitListEmployee() {
       state: { animalId: location.state.animalId, visitId: event.target.value },
     });
   };
+  const confirmWindow = (event) => {
+    confirmAlert({
+      title: "Confirm deletion",
+      message: "This action can not be undone!",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => handleDelete(event),
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  };
   const handleDelete = async (event) => {
     event.preventDefault();
     await visitServices.deleteVisit(
@@ -53,10 +69,7 @@ export default function AnimalVisitListEmployee() {
               {" "}
               Back
             </button>
-            <h2>
-              Here you can find visit history for the selected animal with id:{" "}
-              {location.state.animalId}
-            </h2>
+            <h2>Here you can find visit history for the selected animal</h2>
           </div>
           {visits.length !== 0 ? (
             <ul className="responsive-table">
@@ -95,7 +108,7 @@ export default function AnimalVisitListEmployee() {
                       </button>
                       <button
                         className="button-delete"
-                        onClick={handleDelete}
+                        onClick={confirmWindow}
                         value={visit.id}
                       >
                         {" "}

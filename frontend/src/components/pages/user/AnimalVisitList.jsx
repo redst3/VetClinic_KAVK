@@ -33,10 +33,7 @@ export default function AnimalVisitList() {
               {" "}
               Back
             </button>
-            <h2>
-              Here you can find visit history for the selected animal with id:{" "}
-              {location.state.animalId}
-            </h2>
+            <h2>Here you can find visit history for the selected animal</h2>
           </div>
           {visits.length !== 0 ? (
             <ul className="responsive-table">

@@ -56,5 +56,81 @@ class AuthService {
       return response.data;
     });
   }
+  getUsers() {
+    var config = {
+      method: "get",
+      url: API_URL + "/users/",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+
+    return axios(config)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  getEmployees() {
+    var config = {
+      method: "get",
+      url: API_URL + "/employees",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    };
+
+    return axios(config)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  remove(id) {
+    var data = JSON.stringify({
+      id: id,
+    });
+    var config = {
+      method: "delete",
+      url: API_URL + "/remove",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+    return axios(config)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  updateRole(id) {
+    var data = JSON.stringify({
+      id: id,
+    });
+    var config = {
+      method: "put",
+      url: API_URL + "/update",
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+    return axios(config)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 }
 export default new AuthService();

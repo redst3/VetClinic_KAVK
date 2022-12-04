@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../registeredPages.scss";
 import animalService from "../../services/animalServices";
 import { useNavigate } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
 
 export default function RegisteredAnimalsPage() {
   const [animals, setAnimals] = useState([]);
@@ -33,6 +34,21 @@ export default function RegisteredAnimalsPage() {
   const handleCreate = async (event) => {
     event.preventDefault();
     navigate("create");
+  };
+  const confirmWindow = (event) => {
+    confirmAlert({
+      title: "Confirm deletion",
+      message: "This action can not be undone!",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => handleDelete(event),
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
   };
   const handleDelete = async (event) => {
     event.preventDefault();
@@ -111,7 +127,7 @@ export default function RegisteredAnimalsPage() {
                       <button
                         className="button-delete"
                         value={animal.id}
-                        onClick={handleDelete}
+                        onClick={confirmWindow}
                       >
                         {" "}
                         Remove

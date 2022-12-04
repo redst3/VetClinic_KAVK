@@ -4,7 +4,7 @@ import authServices from "../../services/authServices";
 import { confirmAlert } from "react-confirm-alert";
 import "../registeredPages.scss";
 
-export default function AllUsersPage() {
+export default function AllEmployeesPage() {
   const [users, setUsers] = useState([]);
   const [update, setUpdate] = useState();
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function AllUsersPage() {
     };
   }, [update]);
   async function getUsers() {
-    var users = await authServices.getUsers();
+    var users = await authServices.getEmployees();
     setUsers(users);
   }
   const confirmWindow = (event) => {
@@ -63,7 +63,7 @@ export default function AllUsersPage() {
       <div className="pages-container">
         <div className="pages-container-info">
           <div className="pages-container-info-header">
-            <h2>Here you can find all registered users</h2>
+            <h2>Here you can find all registered employees</h2>
           </div>
           {users.length !== 0 ? (
             <ul className="responsive-table">
@@ -96,7 +96,7 @@ export default function AllUsersPage() {
                         onClick={confirmWindowRole}
                         value={user.id}
                       >
-                        Make Employee
+                        Make User
                       </button>
                     </div>
                     <div className="col col-4-users" data-label="Options">
