@@ -12,7 +12,7 @@ function Cards() {
           <ul className="cards__items">
             <CardItem
               src={photo}
-              text="All user animals"
+              text="User Animals"
               label="Animal"
               path="/user/useranimals"
             />

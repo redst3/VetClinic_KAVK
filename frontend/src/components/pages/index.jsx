@@ -7,6 +7,15 @@ import LoginPage from "./LoginPage";
 import RegisteredAnimalsPage from "./user/RegisteredAnimalsPage";
 import RegisteredAnimalsEditPage from "./user/RegisteredAnimalsEditPage";
 import RegisteredAnimalsCreatePage from "./user/RegisteredAnimalsCreatePage";
+import RegisteredAllAnimalsPage from "./employee/RegisteredAllAnimalsPage";
+import NewVisitPage from "./employee/NewVisitPage";
+import AnimalVisitListEmployee from "./employee/AnimalVisitListEmployee";
+import AnimalVisitEdit from "./employee/AnimalVisitEdit";
+import AnimalVisitList from "./user/AnimalVisitList";
+import VisitProcedureListEmployee from "./employee/VisitProcedureListEmployee";
+import VisitProcedureEdit from "./employee/VisitProcedureEdit";
+import VisitProcedureCreate from "./employee/VisitProcedureCreate";
+import VisitProcedureList from "./user/VisitProcedureList";
 
 export {
   HomePage,
@@ -18,4 +27,13 @@ export {
   RegisteredAnimalsPage,
   RegisteredAnimalsEditPage,
   RegisteredAnimalsCreatePage,
+  RegisteredAllAnimalsPage,
+  NewVisitPage,
+  AnimalVisitListEmployee,
+  AnimalVisitEdit,
+  AnimalVisitList,
+  VisitProcedureListEmployee,
+  VisitProcedureEdit,
+  VisitProcedureCreate,
+  VisitProcedureList,
 };

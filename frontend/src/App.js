@@ -17,6 +17,15 @@ import {
   RegisteredAnimalsPage,
   RegisteredAnimalsEditPage,
   RegisteredAnimalsCreatePage,
+  RegisteredAllAnimalsPage,
+  NewVisitPage,
+  AnimalVisitListEmployee,
+  AnimalVisitEdit,
+  AnimalVisitList,
+  VisitProcedureListEmployee,
+  VisitProcedureEdit,
+  VisitProcedureCreate,
+  VisitProcedureList,
 } from "./components/pages/index";
 import Footer from "./components/Footer";
 
@@ -62,6 +71,24 @@ function App() {
                 />
               }
             />
+            <Route
+              path="/user/useranimals/visits"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"User"}
+                  page={<AnimalVisitList />}
+                />
+              }
+            />
+            <Route
+              path="/user/useranimals/visits/procedures"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"User"}
+                  page={<VisitProcedureList />}
+                />
+              }
+            />
           </Route>
           // Employee protected routes
           <Route>
@@ -75,8 +102,67 @@ function App() {
               }
             />
             <Route
-              path="/employee/"
-              element={<ProtectedRoutes requiredRole={"Employee"} page="" />}
+              path="/employee/allanimals"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"Employee"}
+                  page={<RegisteredAllAnimalsPage />}
+                />
+              }
+            />
+            <Route
+              path="/employee/allanimals/newvisit"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"Employee"}
+                  page={<NewVisitPage />}
+                />
+              }
+            />
+            <Route
+              path="/employee/allanimals/visits"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"Employee"}
+                  page={<AnimalVisitListEmployee />}
+                />
+              }
+            />
+            <Route
+              path="/employee/allanimals/visits/edit"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"Employee"}
+                  page={<AnimalVisitEdit />}
+                />
+              }
+            />
+            <Route
+              path="/employee/allanimals/visits/procedures"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"Employee"}
+                  page={<VisitProcedureListEmployee />}
+                />
+              }
+            />
+            <Route
+              path="/employee/allanimals/visits/procedures/edit"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"Employee"}
+                  page={<VisitProcedureEdit />}
+                />
+              }
+            />
+            <Route
+              path="/employee/allanimals/visits/procedures/new"
+              element={
+                <ProtectedRoutes
+                  requiredRole={"Employee"}
+                  page={<VisitProcedureCreate />}
+                />
+              }
             />
           </Route>
           // Admin protected routes

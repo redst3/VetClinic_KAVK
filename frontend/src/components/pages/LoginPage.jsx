@@ -12,11 +12,13 @@ export default function UserPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [update, setUpdate] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     authServices.login(username, password).then(
       (response) => {
+        setUpdate(true);
         setSuccess("Login was succesful!");
         localStorage.setItem("navbarUpdate", true);
         navigate("/");
@@ -27,12 +29,17 @@ export default function UserPage() {
     );
   };
 
+  useEffect(() => {
+    return () => {
+      window.location.reload();
+    };
+  }, [update]);
   return (
     <>
       <div className="container">
         <div className="form">
           <h1>Login form</h1>
-          <Form onSubmit={handleSubmit}>
+          <Form>
             <Form.Group size="lg" controlId="username">
               <Form.Label>Username</Form.Label>
               <Form.Control
@@ -51,7 +58,9 @@ export default function UserPage() {
             </Form.Group>
             <p className="error-message">{error}</p>
             <p className="success-message">{success}</p>
-            <Button type="submit">Login</Button>
+            <Button type="submit" onClick={handleSubmit}>
+              Login
+            </Button>
             <Link className="form-help" to="/sign-up">
               If you are a new user, use this instead!
             </Link>

@@ -3,42 +3,23 @@ import "../registeredPages.scss";
 import animalService from "../../services/animalServices";
 import { useNavigate } from "react-router-dom";
 
-export default function RegisteredAnimalsPage() {
+export default function RegisteredAllAnimalsPage() {
   const [animals, setAnimals] = useState([]);
-  const [user, setUser] = useState();
-  const [update, setUpdate] = useState();
   const navigate = useNavigate();
   useEffect(() => {
     getAnimals();
-    return () => {
-      getAnimals();
-      setUpdate(false);
-    };
-  }, [update]);
+  }, []);
   async function getAnimals() {
     var animals = await animalService.getAnimals();
-    const localUser = JSON.parse(localStorage.getItem("user"));
-    setUser(localUser);
-    animals = animals.filter((animal) => {
-      return animal.userId === localUser.sub;
-    });
     setAnimals(animals);
   }
   const handleEdit = async (event) => {
     event.preventDefault();
-    navigate("edit", {
+    navigate("newvisit", {
       state: { animalId: event.target.value },
     });
   };
-  const handleCreate = async (event) => {
-    event.preventDefault();
-    navigate("create");
-  };
-  const handleDelete = async (event) => {
-    event.preventDefault();
-    await animalService.deleteAnimal(event.target.value);
-    setUpdate(true);
-  };
+
   const handleVisits = async (event) => {
     event.preventDefault();
     navigate("visits", {
@@ -51,11 +32,7 @@ export default function RegisteredAnimalsPage() {
       <div className="pages-container">
         <div className="pages-container-info">
           <div className="pages-container-info-header">
-            <h2>Here you can find all of your registered animals</h2>
-            <button className="button-new" onClick={handleCreate}>
-              {" "}
-              Register new animal
-            </button>
+            <h2>Here you can find all registered animals</h2>
           </div>
           {animals.length !== 0 ? (
             <ul className="responsive-table">
@@ -93,28 +70,20 @@ export default function RegisteredAnimalsPage() {
                     <div className="col col-4" data-label="Visits">
                       <button
                         className="button-visits"
-                        value={animal.id}
                         onClick={handleVisits}
+                        value={animal.id}
                       >
                         Check history
                       </button>
                     </div>
                     <div className="col col-5" data-label="Options">
                       <button
-                        className="button-edit"
+                        className="button-visits"
                         onClick={handleEdit}
                         value={animal.id}
                       >
                         {" "}
-                        Edit
-                      </button>
-                      <button
-                        className="button-delete"
-                        value={animal.id}
-                        onClick={handleDelete}
-                      >
-                        {" "}
-                        Remove
+                        Add new visit
                       </button>
                     </div>
                   </li>

@@ -2,13 +2,15 @@ import axios from "axios";
 
 const API_URL = "http://localhost:1234/api";
 
-class animalService {
-  getAnimals() {
+class procedureService {
+  getProcedures(animalId, visitId) {
     var config = {
       method: "get",
-      url: API_URL + "/animals?pageNumber=1&pageSize=25",
+      url:
+        API_URL + "/animals/" + animalId + "/visits/" + visitId + "/procedures",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
       },
     };
     return axios(config)
@@ -16,41 +18,56 @@ class animalService {
         return response.data;
       })
       .catch(function (error) {
-        console.log(error);
+        return error;
       });
   }
-  getAnimal(animalId) {
+  getProcedure(animalId, visitId, procedureId) {
     var config = {
       method: "get",
-      url: API_URL + "/animals/" + animalId,
+      url:
+        API_URL +
+        "/animals/" +
+        animalId +
+        "/visits/" +
+        visitId +
+        "/procedures/" +
+        procedureId,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
       },
     };
-
     return axios(config)
       .then(function (response) {
         return response.data;
       })
       .catch(function (error) {
-        console.log(error);
+        return error;
       });
   }
-  updateAnimal(age, breed, name, type, animalId) {
-    var user = JSON.parse(localStorage.getItem("user"));
-    let userName =
-      user["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+  updateProcedure(
+    procedure,
+    description,
+    price,
+    animalId,
+    visitId,
+    procedureId
+  ) {
     var data = JSON.stringify({
-      age: age,
-      breed: breed,
-      name: name,
-      type: type,
-      owner: userName,
-      UserId: user["sub"],
+      name: procedure,
+      description: description,
+      cost: parseInt(price),
     });
     var config = {
       method: "put",
-      url: API_URL + "/animals/" + animalId,
+      url:
+        API_URL +
+        "/animals/" +
+        animalId +
+        "/visits/" +
+        visitId +
+        "/procedures/" +
+        procedureId,
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
         "Content-Type": "application/json",
@@ -59,27 +76,46 @@ class animalService {
     };
     return axios(config)
       .then(function (response) {
-        return response;
+        return response.data;
       })
       .catch(function (error) {
         return error;
       });
   }
-  createAnimal(age, breed, name, type) {
-    var user = JSON.parse(localStorage.getItem("user"));
-    let userName =
-      user["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"];
+  deleteProcedure(animalId, visitId, procedureId) {
+    var config = {
+      method: "delete",
+      url:
+        API_URL +
+        "/animals/" +
+        animalId +
+        "/visits/" +
+        visitId +
+        "/procedures/" +
+        procedureId,
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+    };
+    return axios(config)
+      .then(function (response) {
+        return response.data;
+      })
+      .catch(function (error) {
+        return error;
+      });
+  }
+  createProcedure(procedure, description, price, animalId, visitId) {
     var data = JSON.stringify({
-      age: age,
-      breed: breed,
-      name: name,
-      type: type,
-      owner: userName,
-      UserId: user["sub"],
+      name: procedure,
+      description: description,
+      cost: parseInt(price),
     });
     var config = {
       method: "post",
-      url: API_URL + "/animals/",
+      url:
+        API_URL + "/animals/" + animalId + "/visits/" + visitId + "/procedures",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token"),
         "Content-Type": "application/json",
@@ -88,23 +124,7 @@ class animalService {
     };
     return axios(config)
       .then(function (response) {
-        return response;
-      })
-      .catch(function (error) {
-        return error;
-      });
-  }
-  deleteAnimal(animalId) {
-    var config = {
-      method: "delete",
-      url: API_URL + "/animals/" + animalId,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    };
-    return axios(config)
-      .then(function (response) {
-        return response;
+        return response.data;
       })
       .catch(function (error) {
         return error;
@@ -112,4 +132,4 @@ class animalService {
   }
 }
 
-export default new animalService();
+export default new procedureService();

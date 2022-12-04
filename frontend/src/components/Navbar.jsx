@@ -8,36 +8,36 @@ function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
   const [user, setUser] = useState();
-  // const [navbar, setNavbar] = useState();
+  const [update, setUpdate] = useState();
   const [log, setLog] = useState();
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(setClick(false));
-  const handleLogout = () => authServices.logout();
+  const handleLogout = () => {
+    authServices.logout();
+    setUpdate(true);
+  };
   const handleLogoutMobile = () => {
     closeMobileMenu();
     authServices.logout();
+    setUpdate(true);
   };
 
   useEffect(() => {
     setUser(localStorage.getItem("role"));
-    // setNavbar(localStorage.getItem("navbarUpdate"));
   }, []);
   useEffect(() => {
     showLoginButton();
   }, [user]);
 
-  // useEffect(() => {
-  //   updateNavbar();
-  // }, [navbar]);
+  useEffect(() => {
+    return () => {
+      window.location.reload();
+    };
+  }, [update]);
 
-  // const updateNavbar = () => {
-  //   if (localStorage.getItem("navbarUpdate")) {
-  //     window.location.reload();
-  //     localStorage.removeItem("navbarUpdate");
-  //   }
-  // };
   const showLoginButton = () => {
-    if (user === undefined || user === null) {
+    showButton();
+    if ((user === undefined || user === null) && button) {
       setLog(
         <Button buttonStyle="btn--outline" link="/login">
           Login
@@ -78,7 +78,7 @@ function Navbar() {
                   className="nav-links"
                   onClick={closeMobileMenu}
                 >
-                  User Page
+                  User Panel
                 </Link>
               </li>
             ) : null}
@@ -89,7 +89,7 @@ function Navbar() {
                   className="nav-links"
                   onClick={closeMobileMenu}
                 >
-                  Employee Page
+                  Employee Panel
                 </Link>
               </li>
             ) : null}
@@ -100,7 +100,7 @@ function Navbar() {
                   className="nav-links"
                   onClick={closeMobileMenu}
                 >
-                  Admin Page
+                  Admin Panel
                 </Link>
               </li>
             ) : null}

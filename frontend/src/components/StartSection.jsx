@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button } from "./Button";
 import "../App.css";
 import "./StartSection.css";
+import InfoModal from "./Modal";
 
 function StartSection() {
   const [user, setUser] = useState();
@@ -28,6 +29,7 @@ function StartSection() {
             </Button>
           </div>
         ) : null}
+        <InfoModal />
       </div>
     </>
   );

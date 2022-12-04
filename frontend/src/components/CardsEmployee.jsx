@@ -12,41 +12,9 @@ function Cards() {
           <ul className="cards__items">
             <CardItem
               src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-          </ul>
-          <ul className="cards__items">
-            <CardItem
-              src={photo}
-              text="Testavimasaaaaa"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimas"
-              label="Testavimas"
-              path="/"
-            />
-            <CardItem
-              src={photo}
-              text="Testavimasaaaa"
-              label="Testavimas"
-              path="/"
+              text="All Animals"
+              label="Animal"
+              path="./allanimals"
             />
           </ul>
         </div>

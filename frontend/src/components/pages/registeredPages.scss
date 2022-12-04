@@ -70,6 +70,21 @@ h2 {
   .col-5 {
     flex-basis: 20%;
   }
+  .col-1-visit {
+    flex-basis: 50%;
+  }
+  .col-2-visit {
+    flex-basis: 10%;
+  }
+  .col-3-visit {
+    flex-basis: 20%;
+  }
+  .col-1-visit-user {
+    flex-basis: 50%;
+  }
+  .col-2-visit-user {
+    flex-basis: 50%;
+  }
 
   @media all and (max-width: 960px) {
     .table-header {
@@ -108,6 +123,7 @@ h2 {
   text-decoration: none;
   height: 45px;
   margin-left: 30px;
+  margin-right: 25px;
 }
 
 .button-new:hover {
