@@ -1,7 +1,7 @@
 import axios from "axios";
 import jwt from "jwt-decode";
 
-const API_URL = "http://localhost:1234/api";
+const API_URL = "https://clinicapi.azurewebsites.net/api";
 
 class AuthService {
   login(username, password) {

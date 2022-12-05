@@ -38,7 +38,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
-          // User protected routes
+          <Route path="/sign-up" element={<SignUpPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route>
             <Route
               path="/user"
@@ -92,7 +93,6 @@ function App() {
               }
             />
           </Route>
-          // Employee protected routes
           <Route>
             <Route
               path="/employee"
@@ -167,7 +167,6 @@ function App() {
               }
             />
           </Route>
-          // Admin protected routes
           <Route>
             <Route
               path="/admin"
@@ -193,10 +192,6 @@ function App() {
                 />
               }
             />
-          </Route>
-          <Route path="/" element={<Outlet />}>
-            <Route path="/sign-up" element={<SignUpPage />} />
-            <Route path="/login" element={<LoginPage />} />
           </Route>
         </Routes>
         <Footer />

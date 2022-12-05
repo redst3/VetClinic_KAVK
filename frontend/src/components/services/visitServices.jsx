@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:1234/api";
+const API_URL = "https://clinicapi.azurewebsites.net/api";
 
 class visitService {
   createVisit(text, animalId) {

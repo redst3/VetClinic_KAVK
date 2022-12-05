@@ -45,7 +45,7 @@ function Navbar() {
       );
     } else {
       setLog(
-        <Button buttonStyle="btn--outline" link="/login" onClick={handleLogout}>
+        <Button buttonStyle="btn--outline" link="/" onClick={handleLogout}>
           Logout
         </Button>
       );
@@ -107,7 +107,7 @@ function Navbar() {
             {user !== null ? (
               <li className="nav-item">
                 <Link
-                  to="/login"
+                  to="/"
                   className="nav-links-mobile"
                   onClick={handleLogoutMobile}
                 >

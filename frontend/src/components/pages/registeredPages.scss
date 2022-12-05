@@ -11,6 +11,7 @@
   width: 100%;
   border-radius: 10px;
   min-height: 700px;
+  box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
 }
 .pages-container-info-header {
   padding-bottom: 20px;
@@ -100,6 +101,9 @@ h2 {
 
   @media all and (max-width: 960px) {
     .button-visits {
+      font-size: 15px;
+    }
+    .button-new {
       font-size: 15px;
     }
     .table-header {
