@@ -49,23 +49,38 @@ Sistemos sudedamosios dalys:
 
 # Ką mato vartotojas
 ## Žemiau pateiktos ekrano kopijos iš skirtingų puslapio dalių
-
-![image](https://user-images.githubusercontent.com/78723344/205706753-dbdd2ae1-f25b-4ff6-b871-6df42e7758e4.png)
-<p align="center"> 2 Pav. Sistemos KAVK pagrindinis langas </p>
-![image](https://user-images.githubusercontent.com/78723344/205708155-2914a937-021a-4d34-87d7-8d1366715616.png)
-<p align="center"> 2 Pav. Sistemos KAVK prisijungimo langas su "responsive navbar" </p>
-![image](https://user-images.githubusercontent.com/78723344/205706968-ef2330f2-0e40-45b0-b8df-36586b3cf708.png)
-<p align="center"> 3 Pav. Sistemos KAVK "User panel" langas </p>
-![image](https://user-images.githubusercontent.com/78723344/205707060-9d364d43-7c7b-4bae-9b78-dd28baf211af.png)
-<p align="center"> 4 Pav. Sistemos KAVK "All animals" langas </p>
-![image](https://user-images.githubusercontent.com/78723344/205707271-e083716a-d617-4427-9f58-dec0466d1330.png)
-<p align="center"> 4 Pav. Sistemos KAVK "Specific animal visits" langas </p>
-![image](https://user-images.githubusercontent.com/78723344/205707419-142484ad-49bd-4aa6-bc11-4125ec18c3d1.png)
-<p align="center"> 5 Pav. Sistemos KAVK "Specific visit procedures" langas </p>
-![image](https://user-images.githubusercontent.com/78723344/205707572-2f967620-c87e-4bb3-bc01-e8c2edd0d487.png)
-<p align="center"> 6 Pav. Sistemos KAVK "User management" langas </p>
-![image](https://user-images.githubusercontent.com/78723344/205707859-1d5a194d-a225-4845-a9a4-42619476a643.png)
-<p align="center"> 7 Pav. Sistemos KAVK "Delete confirmation" langas </p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/78723344/205706753-dbdd2ae1-f25b-4ff6-b871-6df42e7758e4.png" />
+  <p align="center"> 2 Pav. Sistemos KAVK pagrindinis langas </p>
+</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/78723344/205708155-2914a937-021a-4d34-87d7-8d1366715616.png" />
+  <p align="center"> 3 Pav. Sistemos KAVK prisijungimo langas su "responsive navbar" </p>
+</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/78723344/205706968-ef2330f2-0e40-45b0-b8df-36586b3cf708.png" />
+  <p align="center"> 4 Pav. Sistemos KAVK "User panel" langas </p>
+</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/78723344/205707060-9d364d43-7c7b-4bae-9b78-dd28baf211af.png" />
+  <p align="center"> 5 Pav. Sistemos KAVK "All animals" langas </p>
+</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/78723344/205707271-e083716a-d617-4427-9f58-dec0466d1330.png" />
+  <p align="center"> 6 Pav. Sistemos KAVK "Specific animal visits" langas </p>
+</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/78723344/205707419-142484ad-49bd-4aa6-bc11-4125ec18c3d1.png" />
+  <p align="center"> 7 Pav. Sistemos KAVK "Specific visit procedures" langas </p>
+</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/78723344/205707572-2f967620-c87e-4bb3-bc01-e8c2edd0d487.png" />
+  <p align="center"> 8 Pav. Sistemos KAVK "User management" langas </p>
+</p>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/78723344/205707859-1d5a194d-a225-4845-a9a4-42619476a643.png" />
+  <p align="center"> 9 Pav. Sistemos KAVK "Delete confirmation" langas </p>
+</p>
 
 
 
