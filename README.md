@@ -827,3 +827,6 @@ Ištrina procedūrą su nurodytu id per URL, funkcija prieinama tik darbuotojams
 ```
 Tuščias body su statuso kodu 204 No content
 ```
+# Išvados
+
+Atlikus ir realizavus savo veterinarijos klinikos KAVK sistemą šio modulio metu, buvo proga prisiminti kaip dirbti su front-end ir back-end technologijomis, taip pat prisiminti kaip viską saugoti debesyje, kad sistema būtų pasiekiama betkada ir betkur. Darbas atliktas su C# ir React technologijomis.
